@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Financial Assistant</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+<h2>🤖 AI Financial Assistant</h2>
+
+<form method="POST">
+
+<div class="mb-3">
+<textarea
+class="form-control"
+name="question"
+rows="4"
+placeholder="Ask anything about your expenses..."
+required></textarea>
+</div>
+
+<button class="btn btn-success">
+    Ask AI
+</button>
+
+<a href="/" class="btn btn-secondary">
+    Back
+</a>
+
+</form>
+
+{% if answer %}
+
+<div class="card mt-4">
+
+<div class="card-body">
+
+<h4>Answer</h4>
+
+<p>{{ answer }}</p>
+
+</div>
+
+</div>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>

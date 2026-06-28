@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Reports</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+{% include "navbar.html" %}
+<div class="container mt-5">
+
+<h1 class="text-center mb-5">
+📊 Expense Reports
+</h1>
+
+<div class="row">
+
+<div class="col-md-4">
+
+<div class="card shadow text-center">
+
+<div class="card-body">
+
+<h5>Total Expense</h5>
+
+<h2 class="text-danger">
+₹{{ total }}
+</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card shadow text-center">
+
+<div class="card-body">
+
+<h5>Total Categories</h5>
+
+<h2 class="text-success">
+{{ categories }}
+</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4">
+
+<div class="card shadow text-center">
+
+<div class="card-body">
+
+<h5>Total Transactions</h5>
+
+<h2 class="text-primary">
+{{ transactions }}
+</h2>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<hr class="my-5">
+
+<h3>Category Wise Report</h3>
+
+<table class="table table-striped">
+
+<thead class="table-dark">
+
+<tr>
+
+<th>Category</th>
+
+<th>Total Amount</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for row in report %}
+
+<tr>
+
+<td>{{ row[0] }}</td>
+
+<td>₹{{ row[1] }}</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+<div class="text-center mt-4">
+
+<a href="/" class="btn btn-primary">
+🏠 Back Home
+</a>
+<a href="/export/csv" class="btn btn-success">
+    📁 Export CSV
+</a>
+</div>
+
+</div>
+
+</body>
+</html>

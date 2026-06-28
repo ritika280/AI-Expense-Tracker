@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Expense</title>
+</head>
+<body>
+{% include "navbar.html" %}
+<h1>Edit Expense</h1>
+
+<form method="POST">
+
+    Amount:
+    <input type="number" name="amount"
+           value="{{ expense[1] }}">
+
+    <br><br>
+
+    Category:
+    <input type="text" name="category"
+           value="{{ expense[2] }}">
+
+    <br><br>
+
+    Description:
+    <input type="text" name="description"
+           value="{{ expense[3] }}">
+
+    <br><br>
+
+    Date:
+    <input type="date" name="date"
+           value="{{ expense[4] }}">
+
+    <br><br>
+
+    <button type="submit">
+        Update Expense
+    </button>
+
+</form>
+
+</body>
+</html>

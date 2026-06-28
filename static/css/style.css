@@ -1,0 +1,16 @@
+body{
+    background:#f5f7fa;
+}
+
+.card{
+    border:none;
+    border-radius:15px;
+}
+
+table{
+    background:white;
+}
+
+.navbar{
+    border-radius:10px;
+}

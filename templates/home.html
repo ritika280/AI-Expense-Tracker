@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+ <a href="/reports" class="btn btn-dark">
+    📊 Reports
+</a>
+<body class="bg-light">
+{% include "navbar.html" %}
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">
+                💰 Expense Tracker
+            </a>
+            <a href="/ai-analysis" class="btn btn-success">
+    🤖 Analyze My Expenses
+</a>
+<a href="/chat" class="btn btn-dark">
+🤖 AI Assistant
+</a>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+
+        <h2 class="mb-4">Expense Tracker Dashboard</h2>
+
+        <!-- Dashboard Cards -->
+        <div class="row">
+
+            <div class="col-md-4 mb-3">
+                <div class="card shadow text-center">
+                    <div class="card-body">
+                        <h5>Total Expense</h5>
+                        <h2 class="text-danger">₹{{ total }}</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <div class="card shadow text-center">
+                    <div class="card-body">
+                        <h5>Total Transactions</h5>
+                        <h2 class="text-primary">{{ expenses|length }}</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <div class="card shadow text-center">
+                    <div class="card-body">
+                        <h5>Categories</h5>
+                        <h2 class="text-success">{{ categories }}</h2>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Add Expense Button -->
+        <div class="mb-3">
+            <a href="/add" class="btn btn-success">
+                + Add Expense
+            </a>
+        </div>
+
+        <!-- Search Bar -->
+        <form method="GET" action="/" class="mb-4">
+
+            <div class="row">
+
+                <div class="col-md-9">
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="search"
+                        placeholder="Search by category..."
+                        value="{{ request.args.get('search','') }}">
+                </div>
+
+                <div class="col-md-3">
+                    <button class="btn btn-primary w-100">
+                        Search
+                    </button>
+                </div>
+
+            </div>
+
+        </form>
+
+        <!-- Expense Table -->
+        <div class="table-responsive">
+
+            <table class="table table-hover table-striped table-bordered shadow">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Amount</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for expense in expenses %}
+
+                    <tr>
+
+                        <td>{{ expense[0] }}</td>
+                        <td>₹{{ expense[1] }}</td>
+                        <td>{{ expense[2] }}</td>
+                        <td>{{ expense[3] }}</td>
+                        <td>{{ expense[4] }}</td>
+
+                        <td>
+                            <a href="/edit/{{ expense[0] }}"
+                               class="btn btn-warning btn-sm">
+                                Edit
+                            </a>
+                        </td>
+
+                        <td>
+                            <a href="/delete/{{ expense[0] }}"
+                               class="btn btn-danger btn-sm">
+                                Delete
+                            </a>
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+<div class="card shadow mt-4">
+
+    <div class="card-body">
+
+        <h4>Expense by Category</h4>
+
+        <canvas id="expenseChart"></canvas>
+
+    </div>
+
+</div>
+            </table>
+
+        </div>
+
+    </div>
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const labels = [
+{% for row in chart_data %}
+"{{ row[0] }}",
+{% endfor %}
+];
+
+const amounts = [
+{% for row in chart_data %}
+{{ row[1] }},
+{% endfor %}
+];
+
+new Chart(document.getElementById("expenseChart"), {
+
+    type: "pie",
+
+    data: {
+
+        labels: labels,
+
+        datasets: [{
+
+            data: amounts
+
+        }]
+
+    }
+
+});
+
+</script>
+</body>
+
+</html>
